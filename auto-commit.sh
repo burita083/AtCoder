@@ -4,5 +4,5 @@ path="/Users/nakazy/atcoder"
 clear
 cd $path
 git add .
-git commit -m "auto commit"
+git commit -m "daily commit"
 git push
