@@ -1,27 +1,15 @@
-a = int(input())
-
-N, K = map(int, input().split())
-
-"1 2 3 4 5を配列に"
-A = list(map(int, input().split()))
-
-for x in A:
-  print(x)
-
-"文字列を一文字ずつ入れる"
-s = list(input())
-print(s)
-for ss in s:
-  print(ss)
-
-"文字列をいれる。そのままforで回せる"
+# get String
 S = input()
-print(S[0])
+
+# define dictionary
+d = {}
 for s in S:
-  print(s)
+    if s in d:
+        d[s] += 1
+    else:
+        d[s] = 1
 
-"a b c を配列に入れる"
-li = input().split()
-for l in li:
-  print(l)
-
+# print k => v
+for k, v in zip(d.keys(), d.values()):
+    print(k, v)
+    
