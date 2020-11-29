@@ -1,28 +1,18 @@
+import itertools
 N, K = map(int, input().split())
+l = []
+for n in range(1, N+1):
+  l.append(n)
 
-k = 0
-while k <= N:
-  k += K
-"1 2 3 4 5を配列に"
-A = list(map(int, input().split()))
+count = 0
+for c in itertools.product(l, repeat=3):
+  a = c[0]
+  b = c[1]
+  c = c[2]
+  A = a+b
+  B = b+c
+  C = c+a
+  if A % K == 0 and B % K == 0 and C % K == 0:
+    count += 1
 
-for x in A:
-  print(x)
-
-"文字列を一文字ずつ入れる"
-s = list(input())
-print(s)
-for ss in s:
-  print(ss)
-
-"文字列をいれる。そのままforで回せる"
-S = input()
-print(S[0])
-for s in S:
-  print(s)
-
-"a b c を配列に入れる"
-li = input().split()
-for l in li:
-  print(l)
-
+print(count)
