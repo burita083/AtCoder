@@ -2,12 +2,10 @@ N = int(input())
 
 A = list(map(int, input().split()))
 
-cums = [0]
-A = sorted(A)
-for a in A:
-    cums.append(cums[-1] + a)
- 
+s = 0
+A.sort()
 ans = 0
-for i in range(N-1):
-    ans += A[i] - (cums[-1] - cums[i+1])
+for i in range(N):
+    ans += i*A[i] - s
+    s += A[i]
 print(ans)

@@ -13,3 +13,13 @@ for i in range(N-1):
   ans += A[i] * (cums[-1] - cums[i+1])
   ans %= MOD
 print(ans)
+
+import numpy
+ans = 0
+ 
+cA = numpy.cumsum(A)
+ 
+for i in range(1, N):
+    ans += i*A[i] * cA[i-1]
+    ans %= MOD
+print(ans)
