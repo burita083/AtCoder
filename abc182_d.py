@@ -3,13 +3,13 @@ N = int(input())
 A = list(map(int, input().split()))
 
 ans = 0
-p = 0
-m = 0
-d = 0
+mx= 0
+total = 0
+cumsum = 0
 
 for i in range(N):
-  d += A[i]
-  m = max(m, d)
-  ans = max(ans, p+m)
-  p += d
+  cumsum += A[i]
+  mx = max(mx, cumsum)
+  ans = max(ans, total + mx)
+  total += cumsum
 print(ans)

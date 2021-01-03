@@ -1,20 +1,29 @@
 N = int(input())
 
-aokiSum = 0
-cities = []
+AOKI = []
+T = []
+a = 0
+R = []
 for x in range(N):
-    aoki, takahashi = map(int, input().split())
-    aokiSum += aoki
-    score = takahashi + aoki + aoki
-    cities.append(score)
-cities.sort()
-cities.reverse()
+  A, B = map(int, input().split())
+  AOKI.append((A+A+B, A))
+  a += A
+  T.append(A)
+  R.append(a)
+AOKI = sorted(AOKI)
+T = sorted(T)
 
-print(cities)
+total = R.pop()
 count = 0
-for score in cities:
+AMax = 0
+while True:
+  tempA = AOKI.pop()
+  AMax += tempA[0] - tempA[1]
+  total -= tempA[1]
+  if AMax > total:
+    count += 1
+    print(count)
+    exit()
   count += 1
-  aokiSum -= score
-  if aokiSum < 0:
-    break
-print(count)
+
+
