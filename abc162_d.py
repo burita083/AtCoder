@@ -1,19 +1,17 @@
 import itertools
 N = int(input())
 S = input()
+R = S.count('R')
+G = S.count('G')
+B = N-R-G
+ans = R*G*B
 
-d = {}
-for i in range(N):
-  d[i] = S[i]
-
-l = list(itertools.combinations(d, 3))
-ans = 0
-for x in l:
-  if d[x[0]] == d[x[1]] or d[x[0]] == d[x[2]] or d[x[1]] == d[x[2]]:
-    continue
-
-  if (x[1] - x[0] != x[2] - x[1]):
-    ans += 1
-
+#二重ループの書き方は迷わないようにする
+for i in range(N-2):
+  for j in range(i+1, N-1):
+    k = j + (j-i) # i, j, kのの隙間が全部同じ
+    if k >= N:
+      break
+    if S[i] != S[j] and S[i] != S[k] and S[j] != S[k]:
+      ans -= 1
 print(ans)
-
