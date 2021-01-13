@@ -1,29 +1,11 @@
-import itertools
-S = int(input())
+s = int(input())
+mod = 10**9+7
 
-
-
-ans = 0
-rng = S//3
-amari = 1000000007
-for i in range(1, rng+1):
-  mn = 3*i
-  if S < mn:
-    continue
-
-  diff = S-mn
-  l = []
-  for k in range(0, diff+1):
-    l.append(k)
-
-  Ls = list(itertools.product(l, repeat=i))
-  for L in Ls:
-    if sum(L) == diff:
-      print(L)
-      ans += 1
-      ans %= amari
-
-print(ans%amari)
-
-
-
+dp = [0] * (s+1)
+dp[0] = 1
+x = 0
+for i in range(3, s+1):
+  x += dp[i-3]
+  dp[i] = x%mod
+ans = dp[s] % mod
+print(ans)
