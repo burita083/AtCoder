@@ -1,15 +1,12 @@
-# get String
-S = input()
+import math
+N = int(input())
+A = list(map(int, input().split()))
 
-# define dictionary
-d = {}
-for s in S:
-    if s in d:
-        d[s] += 1
-    else:
-        d[s] = 1
+ans = 0
+for a in range(1, K+1):
+  for b in range(1, K+1):
+    g = math.gcd(a, b)
+    for c in range(1, K+1):
+      ans += math.gcd(c, g)
 
-# print k => v
-for k, v in zip(d.keys(), d.values()):
-    print(k, v)
-    
+print(ans)
