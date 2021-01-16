@@ -15,13 +15,17 @@ ans = [0] * N
 for q in range(Q):
   visited = [0] * N
   t, e, x = map(int, input().split())
-  print("______________")
   if t == 1:
     queue = deque([e-1])
+    count = 0
     while queue:
       now = queue.popleft()
-      print(now+1)
-      b = l[e-1][1]
+      a = -1
+      b = -1
+      if count == 0:
+        a, b = l[e-1]
+        now = a
+        count += 1
       ans[now] += x
       visited[now] = 1
       for g in graph[now]:
@@ -29,20 +33,24 @@ for q in range(Q):
         if visited[g] == 0:
           visited[g] = 1
           queue.append(g)
-    print(ans)
   else:
     queue = deque([e-1])
+    count = 0
     while queue:
       now = queue.popleft()
-      print(now+1)
-      a = l[e-1][0]
+      a = -1
+      b = -1
+      if count == 0:
+        a, b = l[e-1]
+        now = b
+        count += 1
       ans[now] += x
       visited[now] = 1
       for g in graph[now]:
-        if g == b: continue
+        if g == a: continue
         if visited[g] == 0:
           visited[g] = 1
           queue.append(g)
-    print(ans)
   
-print(ans)
+for a in ans:
+  print(a)

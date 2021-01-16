@@ -3,8 +3,10 @@ N = int(input())
 A = list(map(int, input().split()))
 
 cums = [0]
+aa = 0
 for a in A:
-  cums.append(cums[-1] + a)
+  aa += a
+  cums.append(aa)
 
 ans = []
 for i in range(1, N+1):
