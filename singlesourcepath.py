@@ -12,13 +12,17 @@ dist[r] = 0
 
 heap = []
 heapq.heappush(heap, (0, r))
+visited = [False] * V
 while heap:
   d, current = heapq.heappop(heap)
+  visited[current] = True
   if dist[current] < d:
     continue
 
+  print(visited, current)
   for to, cost in edge[current]:
-    if dist[to] > dist[current] + cost:
+    print(to, cost, current, "aa")
+    if visited[to] == False and dist[to] > dist[current] + cost:
       dist[to] = dist[current] + cost
       heapq.heappush(heap, (dist[to], to))
 
