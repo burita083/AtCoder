@@ -1,13 +1,24 @@
 from itertools import accumulate
 N, C = map(int, input().split())
 
-data = [0] * 1000000001
-
+d = {}
 for _ in range(N):
   a, b, c = map(int, input().split())
-  data[a] += 1
-  data[b+1] -= 1
+  d.setdefault(a, 0)
+  d[a] += c
+  d.setdefault(b+1, 0)
+  d[b+1] -= c
+sd = sorted(d)
+for i in range(1, len(sd)):
+  d[sd[i]] += d[sd[i-1]]
+print(d)
+for k in d:
+  if d[k] > C:
+    d[k] = C
 
-cum = list(accumulate(data))
-print(cum)
+ans = 0
 
+print(sd)
+for i in range(len(sd)-1):
+  ans += d[sd[i]]*(sd[i+1]-sd[i])
+print(ans)
