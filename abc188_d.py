@@ -11,14 +11,12 @@ for _ in range(N):
 sd = sorted(d)
 for i in range(1, len(sd)):
   d[sd[i]] += d[sd[i-1]]
-print(d)
 for k in d:
   if d[k] > C:
     d[k] = C
 
 ans = 0
 
-print(sd)
 for i in range(len(sd)-1):
   ans += d[sd[i]]*(sd[i+1]-sd[i])
 print(ans)
