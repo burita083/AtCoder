@@ -1,27 +1,21 @@
-a = int(input())
+L = int(input())
 
-N, K = map(int, input().split())
+from operator import mul
+from functools import reduce
+ 
+ 
+def cmb(n, r):
+	if n < r:
+		return 0
+	r = min(n - r, r)
+	if r == 0:
+		return 1
+	numer = reduce(mul, range(n, n - r, -1))
+	denom = reduce(mul, range(1, r + 1))
+	return numer // denom 
 
-"1 2 3 4 5を配列に"
-A = list(map(int, input().split()))
 
-for x in A:
-  print(x)
-
-"文字列を一文字ずつ入れる"
-s = list(input())
-print(s)
-for ss in s:
-  print(ss)
-
-"文字列をいれる。そのままforで回せる"
-S = input()
-print(S[0])
-for s in S:
-  print(s)
-
-"a b c を配列に入れる"
-li = input().split()
-for l in li:
-  print(l)
-
+d = {}
+for i in range(12, 201):
+  d[i] = cmb(i-1, 11)
+print(d[L])
