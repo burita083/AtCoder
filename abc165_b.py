@@ -5,7 +5,7 @@ r = 0.01
 
 i = 0
 while A < X:
-  A = int(A*(1+r))
+  A += (A*1)//100
   i = i + 1
 
 print(i)
