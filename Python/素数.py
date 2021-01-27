@@ -73,6 +73,7 @@ def segment_sieve(a,b):
         del ass[0]
     return ass
 
+
 def furui() {
     d = []
     temp = 2
@@ -80,3 +81,14 @@ def furui() {
     for i in range(temp*2, 10**7+1, temp):
         d[i] = d[i-temp]+1
 }
+
+def gcd(x, y):
+    while y != 0:
+        (x, y) = (y, x % y)
+    return x
+
+def gcd_r(x, y):
+    if b == 0:
+        return x
+    else:
+        gcd_r(y, x % y)
