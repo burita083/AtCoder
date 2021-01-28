@@ -1,6 +1,12 @@
 import itertools
-a, b, c, d, e = map(int, input().split())
+A = list(map(int, input().split()))
  
-list = []
-for i in itertools.permutations([a, b, c, d, e], r=3):
-  print(i)
+s = set()
+count = 0
+for ptn in itertools.combinations(A, 3):
+  s.add(sum(ptn))
+l = list(s)
+l.sort()
+print(l[-3])
+
+ 
