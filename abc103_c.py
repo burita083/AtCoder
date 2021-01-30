@@ -1,4 +1,3 @@
-"nの素因数分解"
 N = int(input())
 
 A = list(map(int, input().split()))
