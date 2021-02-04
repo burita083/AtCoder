@@ -1,13 +1,14 @@
-"nの約数列挙"
-def divisor(n):
-    ass = []
-    for i in range(1,int(n**0.5)+1):
-        if n%i == 0:
-            ass.append(i)
-            if i**2 == n:
-                continue
-            ass.append(n//i)
-    return ass
 n = int(input())
 
-print(divisor(n))
+
+l = 0
+r = n+2
+
+while r-l>1:
+    m = (l+r)//2
+    print(m, "l", l, "r", r)
+    if m*(m+1)//2 <= n+1:
+        l = m
+    else:
+        r = m
+print(n-l+1)
