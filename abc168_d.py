@@ -21,10 +21,11 @@ while q:
   for to in es[v]:
     #ここのロジックの意味がまだわかっていない
     #この制御がないとないとループが終わらない
-    if dist[v] + 1 >= dist[to]: continue
-    dist[to] = dist[v]
-    back[to] = v+1
+    if dist[to] != INF: continue
+    dist[to] = dist[v] + 1
+    back[to] = v
     q.append(to)
 
 print("Yes")
-print(*back[1:], sep='\n')
+for i in range(1, N):
+  print(i+1)
