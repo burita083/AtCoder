@@ -9,6 +9,7 @@ for e in range(E):
   edge[s].append((to, cost))
 
 
+Dist = []
 for v in range(V):
   heap = []
   heapq.heappush(heap, (0, v))
@@ -23,17 +24,22 @@ for v in range(V):
       continue
 
     for to, cost in edge[current]:
-      if visited[to] == False:
-        if dist[to] > dist[current] + cost:
+      if visited[to] == False and dist[to] > dist[current] + cost:
           dist[to] = dist[current] + cost
           heapq.heappush(heap, (dist[to], to))
-      else:
-        if flag == False:
-          print(dist[current] + cost, "aa")
-          flag = True
+  Dist.append(dist)
 
-for v in range(V):
-  if dist[v] < float('inf'):
-    print(dist[v])
+l = []
+for i in range(V):
+  ans = float('inf')
+  for v in range(V):
+    for (to, cost) in edge[v]:
+      if to == i:
+        ans = min(ans, Dist[i][v] + cost)
+  l.append(ans)
+
+for ll in l:
+  if ll == float('inf'):
+    print(-1)
   else:
-    print("INF")
+    print(ll)
