@@ -1,23 +1,12 @@
-S = input()
-T = input()
-
-found = []
-
-#区間大事。 len(T)がの仕切りを何箇所入れれるか
-for i in range(len(S) - len(T) + 1):
-  for cs, ct in zip(S[i:], T):
-    if cs != '?' and cs != ct:
+s,t=input(),input()
+n,k=len(s),len(t)
+a=[]
+for i in range(n-k+1):
+  for j in range(k):
+    if s[i+j]!='?' and s[i+j]!=t[j]: 
       break
-  else:
-    found.append(i)
-
-if not found:
-  print("UNRESTORABLE")
-  exit()
-
-ans = 'z'  * 51
-
-for i in found:
-  tmp = S[:i] + T + S[i+len(T):]
-  ans = min(ans, tmp.replace("?", "a"))
-print(ans)
+  else: 
+    print(i, j)
+    a+=[(s[:i]+t+s[i+k:]).replace('?','a')]
+print(a)
+print(min(a) if a else 'UNRESTORABLE')

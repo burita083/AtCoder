@@ -37,3 +37,16 @@ def prime_factor(n):
     return True
  
 s = set()
+
+def eratosthenes(N):
+    sieve = [True]*(N+1)
+    sieve[0] = False
+    sieve[1] = False
+    for i in range(2, int(N**.5)+1):
+        if not sieve[i]:
+            continue
+        for j in range(2*i, N+1, i):
+            sieve[j] = False
+    return [i for i in range(N+1) if sieve[i]]
+ 
+E = eratosthenes(10**6)
