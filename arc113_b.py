@@ -1,9 +1,12 @@
 A, B, C = map(int, input().split())
-mod = 10 ** 9+7
-if A % mod == 0:
-    print(0, 0)
-    exit()
 
-y = pow(A, pow(B, C, mod - 1), mod)
-Y = str(y)
-print(Y[-1])
+a = A
+arr = [a]
+for i in range(11):
+    a *= A
+    if a==arr[0]: break
+    arr.append(a)
+
+k = pow(B, C, len(arr))
+if k == 0: k == 4
+print(pow(A, k, 10))
