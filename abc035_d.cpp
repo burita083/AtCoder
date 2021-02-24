@@ -65,6 +65,7 @@ struct edge {
 };
 vector<vector<edge> > G;
 vector<int> d;
+vector<int> d1;
 void dijkstra(int s) {
     priority_queue<P, vector<P>, greater<P> >que;
     d[s] = 0;
@@ -82,6 +83,10 @@ void dijkstra(int s) {
             }
         }
     }
+}
+
+void dijkstra2(int s, int t) {
+    
 }
 
 //想定解答との絶対誤差または相対誤差が 10−6以下の場合+1以上だしておく。適当に15とかでもおｋ．
@@ -107,33 +112,42 @@ int main() {
         G[a].push_back(e);
     }
     dijkstra(0);
+
     vector<int> from1(N);
     vector<int> to1(N);
     rep(i, 0, N) {
         from1[i] = d[i];
     }
+    int ans = 0;
     rep(i, 1, N) {
         rep (i, 0, N) {
             d[i] = INF;
         }
-        dijkstra(i);
-        to1[i] = d[0];
-    }
-    vector<int> cost(N, 0);
-    rep(i, 0, N) {
-        if (from1[i] != INF) {
-            cost[i] += from1[i];
-            if (i >= 1 && to1[i] != INF) {
-                cost[i] += to1[i];
+        priority_queue<P, vector<P>, greater<P> >que;
+        d[i] = 0;
+        que.push(P(0, i));
+        int remain = T;
+        while(!que.empty()) {
+            P p = que.top();
+            que.pop();
+            int v = p.second;
+            if (d[v] < p.first) continue;
+            if (v == 0) {
+                to1[i] = from1[i] + p.first;
+                remain -= to1[i];
+                chmax(ans, remain*a[i]);
+                break;
             }
-            //cout << "1から" << i+1 << "までのコスト: " << from1[i] << endl;
+            rep (i, 0, G[v].size()) {
+                edge e = G[v][i];
+                if (d[e.to] > d[v] + e.cost) {
+                    d[e.to] = d[v] + e.cost;
+                    que.push(P(d[e.to], e.to));
+                }
+            }
         }
     }
-    int res = 0;
-    rep(i, 0, N) {
-        int time = T-cost[i];
-        res = max(res, a[i]*time);
-    }
-    cout << res << endl;
+    chmax(ans, T*a[0]);
+    cout << ans << endl;
     return 0;
 }

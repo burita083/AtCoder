@@ -1,8 +1,6 @@
 N, M = map(int, input().split())
-import math
 
-a = M * (N//M) + (N%M)
-print(a)
+print(pow(10, N, M*M)//M %M)
 ##n = 10**N
 #NN = "10"
 #MI = int(M)
