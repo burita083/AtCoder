@@ -1,56 +1,52 @@
 from collections import deque
 N = int(input())
 
-graph = [[] for _ in range(N)]
+edge = []
+g = [[] for _ in range(N)]
 
-l = []
 for _ in range(N-1):
   a, b = map(int, input().split())
-  l.append((a-1,b-1))
-  graph[a-1].append(b-1)
-  graph[b-1].append(a-1)
+  edge.append((a-1, b-1))
+  g[a-1].append(b-1)
+  g[b-1].append(a-1)
 Q = int(input())
 
 ans = [0] * N
+
+depth = [-1] * N
+depth[0] = 0
+q = [0]
+while q:
+  at = q.pop()
+  for i in g[at]:
+    if depth[i] == -1:
+      depth[i] = depth[at] + 1
+      q.append(i)
+
+s = [0] * N
 for q in range(Q):
-  visited = [0] * N
   t, e, x = map(int, input().split())
+  A, B = edge[e-1]
+  if depth[A] > depth[B]:
+    A, B = B, A
+    if t == 1:
+      t = 2
+    else:
+      t = 1 
   if t == 1:
-    queue = deque([e-1])
-    count = 0
-    while queue:
-      now = queue.popleft()
-      a = -1
-      b = -1
-      if count == 0:
-        a, b = l[e-1]
-        now = a
-        count += 1
-      ans[now] += x
-      visited[now] = 1
-      for g in graph[now]:
-        if g == b: continue
-        if visited[g] == 0:
-          visited[g] = 1
-          queue.append(g)
+    s[0] += x
+    s[B] -= x
   else:
-    queue = deque([e-1])
-    count = 0
-    while queue:
-      now = queue.popleft()
-      a = -1
-      b = -1
-      if count == 0:
-        a, b = l[e-1]
-        now = b
-        count += 1
-      ans[now] += x
-      visited[now] = 1
-      for g in graph[now]:
-        if g == a: continue
-        if visited[g] == 0:
-          visited[g] = 1
-          queue.append(g)
+    s[B] += x
   
-for a in ans:
-  print(a)
+print(s)
+q = [0]
+while q:
+  at = q.pop()
+  for to in g[at]:
+    if depth[at] < depth[to]: #toのほうが根が深い場合は、足す
+      s[to] += s[at]
+      q.append(to)
+
+for i in s:
+  print(i)
