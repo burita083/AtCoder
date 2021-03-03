@@ -9,11 +9,11 @@ ans = 1
 r = 0
 mx = -1
 for l in range(N):
-  print(l, "aaa")
   if S[l] == 0: 
     mx = N 
     break
-  while r < N and ans * S[r] <= K:
+
+  while r < N and S[r] * ans <= K:
     ans *= S[r]
     r += 1
   mx = max(r-l, mx)
