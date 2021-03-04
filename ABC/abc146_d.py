@@ -8,20 +8,20 @@ for i in range(N-1):
 
 queue = deque([0])
 ans = [0] * N
-ngs = [-1] * N
+ng_colors = [-1] * N
 K = 0
 
 num_color = 0
 while queue:
   v = queue.popleft()
   color = 1
-  ng_color = ngs[v]
+  ng_color = ng_colors[v]
   for e, i in graph[v]:
     if ans[i] == 0:
       if color == ng_color:
         color += 1
       num_color = max(num_color, color)
-      ngs[e] = color
+      ng_colors[e] = color
       ans[i] = color
       color += 1
       queue.append(e)
