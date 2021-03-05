@@ -11,16 +11,17 @@ for _ in range(M):
 l = []
 count = 0
 def dfs(start):
-    l.append(start)
-    print(l)
+    l.append(start+1)
     if len(l) == N:
         global count
         count += 1
 
     for n in graph[start]:
-        if n in l:
+        if n+1 in l:
             continue
         dfs(n)
+    print(l, "before")
     l.pop()
+    print(l, "after")
 dfs(0)
 print(count)

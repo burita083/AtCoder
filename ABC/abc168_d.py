@@ -17,15 +17,17 @@ back = [-1] * N
 
 while q:
   v = q.popleft()
-  print(v)
   for to in es[v]:
-    #ここのロジックの意味がまだわかっていない
-    #この制御がないとないとループが終わらない
     if dist[to] != INF: continue
     dist[to] = dist[v] + 1
-    back[to] = v
+    back[to] = v+1
     q.append(to)
+
+for i in range(1, N):
+  if back[i] == -1: 
+    print("No")
+    exit()
 
 print("Yes")
 for i in range(1, N):
-  print(i+1)
+  print(back[i])
