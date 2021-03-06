@@ -14,7 +14,6 @@ for k in range(N): #中継点
     for i in range(N): #始点
         for j in range(N): #終点
           dp[i][j] = min(dp[i][j], dp[i][k]+dp[k][j])
-print(dp)
 longest = [0]*N
 for i in range(N):
     for j in range(N):

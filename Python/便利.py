@@ -94,7 +94,15 @@ def pjoin2(ary):
 
 # <<<反転系>>>
 # リストの反転は、ary[::-1]
-# 文字列の反転は、s[::-1]
+# 文字列の反転は、
+s = "aiueo"
+s[::-1]
 
 ###########################################################
 
+from collections import Counter
+l = [1, 2, 3, 1 2]
+C = Counter(l)
+st = set(C.keys())
+ln = len(C)
+e = C[0] #なければゼロあれば、Value

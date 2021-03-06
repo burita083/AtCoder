@@ -7,7 +7,7 @@ for i in range(N-1):
   graph[b-1].append((a-1, i))
 
 queue = deque([0])
-ans = [0] * N
+ans = [-1] * N
 ng_colors = [-1] * N
 K = 0
 
@@ -17,14 +17,14 @@ while queue:
   color = 1
   ng_color = ng_colors[v]
   for e, i in graph[v]:
-    if ans[i] == 0:
-      if color == ng_color:
-        color += 1
-      num_color = max(num_color, color)
-      ng_colors[e] = color
-      ans[i] = color
+    if ans[i] != -1: continue
+    if color == ng_color:
       color += 1
-      queue.append(e)
+    num_color = max(num_color, color)
+    ng_colors[e] = color
+    ans[i] = color
+    color += 1
+    queue.append(e)
 print(num_color)
 for i in range(N-1):
   print(ans[i])
