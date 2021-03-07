@@ -10,16 +10,23 @@ for c in T:
     cnt[int(c)] -= 1
 
 ans = 0
+s = "111139"
+print(s.count("1"), "aaaaaaaaaaaaaaaaa")
+print(s.count("3"), "aaaaaaaaaaaaaaaaa")
+print(s.count("9"), "aaaaaaaaaaaaaaaaa")
+print(s.count("2"), "aaaaaaaaaaaaaaaaa")
 def score(S):
     cnt = [0] * 10
     for c in S:
         cnt[int(c)] += 1
     ans = 0
     for i in range(1, 10):
-        ans += i * 10 ** cnt[i]
+        ans += i * 10 ** S.count(str(i))
     return ans
 
 for i in range(1, 10):
+  print((S+str(i)).count(str(i)))
+  print(cnt[i], "aajkjh")
   if cnt[i] <= 0:continue
 
   for j in range(1, 10):

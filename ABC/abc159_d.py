@@ -1,25 +1,21 @@
-def choose2(n):
-    return n * (n - 1) // 2
-
-a = int(input())
+import math
+from collections import Counter
+N = int(input())
 A = list(map(int, input().split()))  
-d = {}
+dp = [0] * (N+1)
 for k in A:
-  if k in d:
-    d[k] += 1
-  else:
-    d[k] = 1
+  dp[k] += 1
+
+C = Counter(A)
+print(C)
+C[3] -= 1
+if C[0] > 0:
+  C[0] -= 1
+print(C)
  
-res = 0
-for k in d.values():
-  res += choose2(k)
+sm = 0
+for k in dp:
+  sm += math.comb(k, 2)
 
 for k in A:
-  temp = res
-  m = d[k]
-  temp -= choose2(m)
-
-  d[k] -= 1
-  temp += choose2(d[k])
-  print(temp)
-  d[k] += 1
+  print(sm - math.comb(dp[k], 2)  + math.comb(dp[k]-1, 2))
