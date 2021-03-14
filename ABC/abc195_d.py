@@ -1,30 +1,31 @@
-import copy
-
-N, M, Q = map(int, input().split())
-box = [[] for i in range(10**6+1)]
-for i in range(N):
-  W, V = map(int, input().split())
-  box[W].append(V)
-
-for b in box:
-  b.sort()
-X = list(map(int, input().split()))
-for i in range(Q):
-  L, R = map(int, input().split())
-  l = range(L, R+1)
-  current = copy.deepcopy(box)
-  ans = 0
-  for i in range(M):
-    mx = -1
-    if i+1 in l: 
-      continue
-    for k in reversed(range(X[i]+1)):
-      if k == 0: continue
-      if len(current[k]) >= 1:
-        ans += current[k].pop()
-        break
-  print(ans)
-  
+N,M,Q = map(int,input().split())
+WV = [tuple(map(int,input().split())) for i in range(N)]
+X = list(map(int,input().split()))
+LR = [tuple(map(int,input().split())) for i in range(Q)]
+ 
+l = [(1, 2, 3), (3, 2, 4), (3, 4, 9)]
+print(l)
 
 
+l.sort(key=lambda x:(-x[1]))
+print(l)
 
+l = [(1, 2, 3), (3, 2, 4), (3, 4, 9)]
+l.sort(key=lambda x:(-x[2]))
+print(l)
+for l, r in LR:
+    xs = X[:l-1] + X[r:]
+    xs.sort()
+    ans = 0
+    for w, v in WV:
+        idx = -1
+        if not xs: break
+        if w > xs[-1]: continue
+        ans += v
+        for i, x in enumerate(xs):
+          if w <= x:
+            idx =  i
+            break
+        if idx == -1: continue
+        del xs[idx]
+    print(ans)

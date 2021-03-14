@@ -106,3 +106,14 @@ C = Counter(l)
 st = set(C.keys())
 ln = len(C)
 e = C[0] #なければゼロあれば、Value
+
+
+#############################################
+l = [(1, 2, 3), (3, 2, 4), (3, 4, 9)]
+print(l)
+#タプルのソートはlambdaでどれをkeyにするか指定する
+#降順にしたい場合は、-x[2]のようにする
+l.sort(key=lambda x:(-x[2]))
+
+l.sort(key=lambda x:(-x[1]))
+print(l)

@@ -1,3 +1,6 @@
+N, M = map(int, input().split())
+AB = [tuple(map(int,input().split())) for i in range(N)]
+graph = [[] for _ in range(M)]
 class UnionFind:
     def __init__(self,N):
         self.parent = [i for i in range(N)]
@@ -25,16 +28,24 @@ class UnionFind:
     def size(self,a):
         return self._size[self.root(a)]
 
-
-N, Q = map(int, input().split())
-PAB = [tuple(map(int,input().split())) for i in range(Q)]
 uf = UnionFind(N)
-for pab in PAB:
-    if pab[0] == 0:
-        uf.unite(pab[1],pab[2])
-    else:
-        if uf.is_same(pab[1],pab[2]): 
-            print("Yes")
-        else: 
-            print("No")
+for a,b in AB:
+  a,b = a-1,b-1
+  graph[a].append(b)
 
+for g in graph:
+  if len(g) >= 2:
+    for i in range(len(g)-1):
+      uf.unite(g[i], g[i+1])
+
+dp = [-1] * N
+for g in graph:
+  for gg in g:
+    dp[uf.root(gg)] += 1
+    break
+ans = 0
+for e in dp:
+  if e >= 1:
+    ans += e
+  
+print(ans)
